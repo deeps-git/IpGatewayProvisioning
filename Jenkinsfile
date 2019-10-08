@@ -23,9 +23,14 @@ pipeline {
                echo 'Checking out bamboo_deployment_projects.git'
                git branch: 'dev', credentialsId: '5ba3567c-bfb0-451f-bdf0-6431c3e309b5', url: 'git@github.comcast.com:CRPL/bamboo_deployment_projects.git'
                sh 'cd /var/lib/jenkins/workspace/IpGatewayProvisioning-DevStage/CRPLSupportFunctions_scripts/workingSetup/ && ./gitpull.sh'
-               echo "Checking build type"
-               sh   "cd ${BUILD_BASE_PATH}/${BUILD_DIR}/${REPO_TO_BUILD}"
-               echo "Current dir is ${BUILD_BASE_PATH}/${BUILD_DIR}/${REPO_TO_BUILD}"
+             
+            stage('Test') {
+               steps {
+                 echo "Checking build type"
+                 sh   "cd ${BUILD_BASE_PATH}/${BUILD_DIR}/${REPO_TO_BUILD}"
+                 echo "Current dir is ${BUILD_BASE_PATH}/${BUILD_DIR}/${REPO_TO_BUILD}"
+               }
+            }
            }
            }
       }
